@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Running the app
 
-**Recommended (no server needed):** open `index.html` with VS Code Live Server or any static file server.
+**Recommended (no server needed):** open `index.html` with VS Code Live Server or any static file server..
 
 **Alternative (Node.js backend):**
 ```bash
