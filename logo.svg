@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <!-- background -->
+  <rect width="128" height="128" rx="24" fill="#1a1e25"/>
+
+  <!-- document shadow -->
+  <rect x="42" y="28" width="52" height="66" rx="4" fill="#2a2e38"/>
+
+  <!-- document body -->
+  <rect x="36" y="22" width="52" height="66" rx="4" fill="#c84b1f"/>
+
+  <!-- folded corner -->
+  <path d="M74 22 L88 36 L74 36 Z" fill="#a03a16"/>
+
+  <!-- fold crease -->
+  <path d="M74 22 L88 36" stroke="#1a1e25" stroke-width="1" fill="none"/>
+
+  <!-- lines -->
+  <rect x="44" y="50" width="32" height="3" rx="1.5" fill="rgba(255,255,255,0.55)"/>
+  <rect x="44" y="59" width="28" height="3" rx="1.5" fill="rgba(255,255,255,0.35)"/>
+  <rect x="44" y="68" width="24" height="3" rx="1.5" fill="rgba(255,255,255,0.25)"/>
+
+  <!-- bottom bar accent -->
+  <rect x="36" y="78" width="52" height="10" rx="0 0 4 4" fill="#a03a16"/>
+</svg>
