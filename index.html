@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doccer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- background video -->
+    <div class="bg-video-wrap" aria-hidden="true">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="bg.mp4" type="video/mp4" />
+      </video>
+      <div class="bg-overlay"></div>
+      <div class="bg-blur"></div>
+    </div>
+
+    <!-- sign-in screen -->
+    <div id="signin-screen" class="screen" hidden>
+      <div class="center-card">
+        <div class="logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#c84b1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="#c84b1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <h1>Doccer</h1>
+        <span class="system-label">Document Retrieval System // Authorised Access Only</span>
+
+        <p class="subtitle">Retrieve all Google Docs from the drive and export as a single consolidated PDF log.</p>
+
+        <ul class="features">
+          <li>
+            <span class="indicator"></span>
+            All documents sorted by creation date
+          </li>
+          <li>
+            <span class="indicator"></span>
+            Merged into one PDF with table of contents
+          </li>
+          <li>
+            <span class="indicator"></span>
+            Read-only access — nothing stored or transmitted
+          </li>
+        </ul>
+
+        <div class="card-divider"></div>
+
+        <div id="auth-error" class="error-banner" hidden></div>
+
+        <button id="signin-btn" class="btn btn-google">
+          <svg width="16" height="16" viewBox="0 0 48 48" aria-hidden="true">
+            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+          </svg>
+          Authenticate via Google
+        </button>
+      </div>
+    </div>
+
+    <!-- main app screen -->
+    <div id="app-screen" class="screen" hidden>
+      <header class="topbar">
+        <div class="topbar-logo">
+          <div class="topbar-logo-icon" aria-hidden="true">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M14 2v6h6M16 13H8M16 17H8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          Doccer
+        </div>
+        <div class="topbar-right">
+          <div class="user-chip">
+            <div id="user-avatar" class="user-avatar"></div>
+            <span id="user-email" class="user-email"></span>
+          </div>
+          <button id="signout-btn" class="btn btn-ghost">Sign out</button>
+        </div>
+      </header>
+
+      <main class="main">
+        <!-- loading state -->
+        <div id="loading-state" class="state-block" hidden>
+          <div class="loading-bar-wrap">
+            <div class="loading-bar"></div>
+          </div>
+          <p id="loading-message">Fetching your Google Docs…</p>
+        </div>
+
+        <!-- error state -->
+        <div id="error-state" class="state-block" hidden>
+          <p class="error-text" id="error-message"></p>
+          <button id="retry-btn" class="btn btn-primary">Retry</button>
+        </div>
+
+        <!-- empty state -->
+        <div id="empty-state" class="state-block" hidden>
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="opacity:.2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p class="muted">No documents found in drive.</p>
+        </div>
+
+        <!-- docs list -->
+        <div id="docs-state" hidden>
+          <div class="list-header">
+            <div>
+              <h2 id="docs-count"></h2>
+              <p class="muted" id="docs-range"></p>
+            </div>
+            <button id="download-btn" class="btn btn-primary">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Export PDF
+            </button>
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th class="col-num">#</th>
+                  <th>Title</th>
+                  <th class="col-date">Created</th>
+                </tr>
+              </thead>
+              <tbody id="docs-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- google identity services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- pdf-lib for native pdf merging -->
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="script.js" defer></script>
+  </body>
+</html>

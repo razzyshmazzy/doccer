@@ -1,0 +1,19 @@
+{
+  "name": "doccer",
+  "version": "1.0.0",
+  "description": "Sign in with Google and export your owned Docs list as a PDF",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "automate": "node automate.js"
+  },
+  "dependencies": {
+    "playwright": "^1.40.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "googleapis": "^140.0.1",
+    "pdfkit": "^0.15.0"
+  }
+}
