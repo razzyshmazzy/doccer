@@ -235,6 +235,26 @@ body {
 .btn-primary:hover { background: #d95828; }
 .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
 
+.btn-legal {
+  background: #1a1e25;
+  color: var(--muted-mid);
+  border: 1px solid var(--border);
+  font-size: 10px;
+  padding: 7px 14px;
+  flex: 1;
+  justify-content: center;
+}
+.btn-legal:hover {
+  background: #1f2530;
+  color: var(--text);
+}
+
+.legal-links {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
 .btn-ghost {
   background: transparent;
   color: var(--muted-mid);
