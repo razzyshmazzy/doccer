@@ -247,6 +247,14 @@ body {
   color: var(--text);
 }
 
+.data-notice {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 14px;
+  letter-spacing: 0.02em;
+}
+
 .legal-links {
   display: flex;
   gap: 8px;
