@@ -403,6 +403,7 @@ function init() {
   const stored = loadStoredToken();
   if (stored) {
     accessToken = stored;
+    hide(signinScreen);
     onAuthenticated();
   } else {
     show(signinScreen);
