@@ -6,13 +6,14 @@
     <title>Doccer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=IBM+Plex+Mono:wght@400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=IBM+Plex+Mono:wght@400;500;600&display=swap" /></noscript>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <!-- background video -->
     <div class="bg-video-wrap" aria-hidden="true">
-      <video class="bg-video" autoplay muted loop playsinline>
+      <video class="bg-video" autoplay muted loop playsinline preload="none">
         <source src="bg.mp4" type="video/mp4" />
       </video>
       <div class="bg-overlay"></div>
